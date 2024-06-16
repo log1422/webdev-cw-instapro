@@ -71,10 +71,10 @@ export const goToPage = (newPage, data) => {
       page = LOADING_PAGE;
       renderApp();
 
-      return getPosts({ token: getToken() })
+      return getPosts({ token: getToken(), userId })
         .then((newPosts) => {
           page = USER_POSTS_PAGE;
-          posts = newPosts.filter((post) => post.user.id === userId);
+          posts = newPosts //.filter((post) => post.user.id === userId);
           renderApp();
         })
         .catch((error) => {

@@ -15,9 +15,9 @@ export function renderPostsPageComponent({ appEl }) {
       const length = post.likes.length - 1
 
       if (length)
-        likeDescription = `<strong>${user.name}</strong> и <strong>${length}</strong>`
+        likeDescription = `<strong>${user.name.sanitize()}</strong> и <strong>${length}</strong>`
       else
-        likeDescription = `<strong>${user.name}</strong>`
+        likeDescription = `<strong>${user.name.sanitize()}</strong>`
     } else {
       likeDescription = `<strong>${post.likes.length}</strong>`
     }
@@ -81,7 +81,7 @@ function renderLike() {
     likesButtons.addEventListener("click", () => {
       const postId = likesButtons.dataset.id
 
-      const likePosition = (likesButtons.dataset.like == "true") ? "dislike" : "like";
+      const likePosition = (likesButtons.dataset.like === "true") ? "dislike" : "like";
 
       likeChange({token: getToken(), postId, likePosition})
       .then((post) => {
@@ -103,7 +103,7 @@ function renderLike() {
         likeItem.innerHTML = `
         <div id="${post.id}" class="post-likes">
           <button data-id="${post.id}" data-like="${post.isLiked}" class="like-button">
-            <img src="./assets/images/${likeSvg}">
+            <img src="./assets/images/${likeSvg}" alt="like">
           </button>
           <p class="post-likes-text">
 <!--            Нравится: <strong>${post.likes.length}</strong>-->
